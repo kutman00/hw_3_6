@@ -7,15 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.geektech.hw_3_6.databinding.ActivityMainBinding
+import com.geektech.hw_3_6.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
     private val data = arrayListOf<Sport>()
     private var recView: RecyclerView? = null
+    private lateinit var binding: FragmentSecondBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_second, container, false)
+    ): View {
+        binding =
+            FragmentSecondBinding.inflate(LayoutInflater.from(requireContext()), container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,8 +28,8 @@ class SecondFragment : Fragment() {
         loadData()
         recView = view.findViewById(R.id.recycler_view)
         var adapter = SportAdapter(data = data)
-        recView?.adapter = adapter
-        recView?.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     private fun loadData() {
